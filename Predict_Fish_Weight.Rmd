@@ -78,9 +78,32 @@ Additionally, the data indicates that the H-W models are the two regression mode
 
 ## Pike
 
+```{r}
+library(leaps)
+regsubsets.out <-
+  regsubsets(Weight ~.,
+                             data=Pike,
+                             nbest=1,
+                             force.in=NULL,force.out=NULL,
+                             method="exhaustive")
+summary.out<-summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+
+```
+
+```{r}
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend = "bottom",main="adjustedR^2")
+
+
+```
+
+
 ### Best Models
+According to the data, the 5-element L1–L2–L3–H–W model is the most effective.
 
 ### Best Two regressor model
+L1–L3 are the best two regressor models.  In other words, the best two regressor models are not the same as the overall best model.  Consequently, an ANOVA test must be performed in order to properly compare them.
 
 ## Roach
 
