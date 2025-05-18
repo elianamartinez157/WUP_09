@@ -106,9 +106,28 @@ According to the data, the 5-element L1–L2–L3–H–W model is the most effe
 L1–L3 are the best two regressor models.  In other words, the best two regressor models are not the same as the overall best model.  Consequently, an ANOVA test must be performed in order to properly compare them.
 
 ## Roach
+```{r}
+library(leaps)
+regsubsets.out <-
+  regsubsets(Weight ~.,
+                             data=Roach,
+                             nbest=1,
+                             force.in=NULL,force.out=NULL,
+                             method="exhaustive")
+summary.out<-summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+
+```
+
+```{r}
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend= "bottomleft",main="adjustedR^2")
+```
 
 ### Best Models
+Model 2, which incorporates L3 and W, appears to be the most successful based on the data.
 
 ### Best Two regressor model
+The best two-regressor model is also Model 2, which consists of the L3 and W variables.
 
 ## Final Summary Statements
