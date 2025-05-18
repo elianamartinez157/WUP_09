@@ -51,10 +51,30 @@ Whitefish <- select(Whitefish, -Species)
 
 ## Perch
 
+```{r}
+library(leaps)
+regsubsets.out <-
+  regsubsets(Weight ~.,
+                             data=Perch,
+                             nbest=1,
+                             force.in=NULL,force.out=NULL,
+                             method="exhaustive")
+summary.out<-summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+
+```
+
+```{r}
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="adjustedR^2")
+
+```
+
 ### Best Models
+Between the two data tables the H-W model—appears to be the most effective.
 
 ### Best Two regressor model
-
+Additionally, the data indicates that the H-W models are the two regression models with the best performance.
 
 ## Pike
 
